@@ -1,26 +1,39 @@
 <%= form_with model: article do |form| %>
-  <div>
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-    <% article.errors.full_messages_for(:title).each do |message| %>
-      <div><%= message %></div>
-    <% end %>
+  <div class="row mb-3">
+    <div class="col-sm-2 col-lg-1">
+      <%= form.label :title, class: "col-form-label" %><span class="text-danger">*</span>
+    </div>
+    <div class="col-sm-10 col-lg-11">
+      <%= form.text_field :title, class: "form-control", required: true %>
+      <% article.errors.full_messages_for(:title).each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-sm-2 col-lg-1">
+      <%= form.label :body, class: "col-form-label" %><span class="text-danger">*</span>
+    </div>
+    <div class="col-sm-10 col-lg-11">
+      <%= form.text_field :body, class: "form-control", required: true %>
+      <% article.errors.full_messages_for(:body).each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    </div>
+
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-sm-2 col-lg-1">
+      <%= form.label :status, class: "col-form-label" %><span class="text-danger">*</span>
+    </div>
+    <div class="col-sm-10 col-lg-11">
+      <%= form.select :status, Article.valid_statuses, {}, {class: "form-select"} %>
+    </div>
   </div>
 
   <div>
-    <%= form.label :body %>
-    <%= form.text_field :body %>
-    <% article.errors.full_messages_for(:body).each do |message| %>
-      <div><%= message %></div>
-    <% end %>
-  </div>
-
-  <div>
-    <%= form.label :status %>
-    <%= form.select :status, Article.valid_statuses, selected: 'public' %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+    <%= form.submit class: "btn btn-outline-primary" %>
   </div>
 <% end %>
