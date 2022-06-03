@@ -1,15 +1,21 @@
-<h1>Articles</h1>
+<h1 class="display-5"><b>Articles</b></h1>
 
-Our blog has <%= Article.public_count %> articles and counting!
+<p class="lead">Our blog has <%= Article.public_count %> articles and counting!</p>
 
-<ul>
+<div class="list-group">
   <% @articles.each do |article| %>
     <% unless article.archived? %>
-      <li>
-        <%= link_to article.title, article %>
-      </li>    
+      <%= link_to article, class: "list-group-item list-group-item-action d-flex justify-content-between align-items-start" do %>
+        <div class="ms-2 me-auto">
+          <div class="fw-bold">
+            <%= article.title %>
+          </div>
+          <%= article.body %>
+        </div>
+        <span class="badge bg-danger rounded-pill"><%= article.comments.size %></span>
+      <% end %>
     <% end %>
   <% end %>
-</ul>
-
-<%= link_to "New Article", new_article_path %>
+</div>
+<br/>
+<%= link_to "New Article", new_article_path, class: "btn btn-outline-primary" %>
