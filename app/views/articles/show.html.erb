@@ -1,0 +1,16 @@
+<h1 class="display-5"><b><%= @article.title %></b></h1>
+
+<p class="lead"><%= @article.body %></p>
+
+<%= link_to "Edit", edit_article_path(@article), class: "text-decoration-none fw-bold" %> |
+<%= link_to "Delete", article_path(@article), method: :delete, data: { confirm: "Are you sure?" }, class: "text-decoration-none fw-bold" %> |
+<%= link_to "Back to Index", articles_path, class: "text-decoration-none fw-bold" %>
+<br>
+<br>
+<h2>Comments</h2>
+<div class="list-group">
+  <%= render @article.comments %>
+</div>
+
+<br>
+<%= render "comments/form" %>
